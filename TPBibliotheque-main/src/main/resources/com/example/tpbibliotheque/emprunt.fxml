@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Label?>
+<VBox spacing="20" alignment="CENTER"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.tpbibliotheque.Controller.EmpruntController"
+      stylesheets="@emprunt.css"
+      styleClass="main-content"
+      fx:id="empruntSection">
+
+    <ComboBox fx:id="eleveCombo" promptText="Sélectionner un élève" styleClass="input-field"/>
+    <ComboBox fx:id="livreCombo" promptText="Sélectionner un livre" styleClass="input-field"/>
+
+    <Button fx:id="btnEmprunter" text="Emprunter" onAction="#enregistrerEmprunt" styleClass="emprunt-button"/>
+    <Label fx:id="lblStatus" text="" styleClass="status-label"/>
+</VBox>

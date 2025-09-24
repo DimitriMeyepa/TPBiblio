@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+
+<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.tpbibliotheque.Controller.LivreController"
+      stylesheets="@livre.css"
+      fx:id="livreSection"
+      styleClass="main-content">
+    <TextField fx:id="isbnField" promptText="Code ISBN" styleClass="input-field"/>
+    <TextField fx:id="titreField" promptText="Titre" styleClass="input-field"/>
+    <TextField fx:id="auteurField" promptText="Auteur" styleClass="input-field"/>
+    <TextField fx:id="anneeField" promptText="Année de publication" styleClass="input-field"/>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="ajouterButton" text="Ajouter" onAction="#ajouterLivre" styleClass="livre-button"/>
+        <Button fx:id="modifierButton" text="Modifier" onAction="#modifierLivre" styleClass="livre-button"/>
+        <Button fx:id="supprimerButton" text="Supprimer" onAction="#supprimerLivre" styleClass="livre-button"/>
+        <Button fx:id="annulerButton" text="Annuler" onAction="#annulerSelection" visible="false" styleClass="livre-button"/>
+    </HBox>
+
+    <TableView fx:id="livreTable" prefHeight="250">
+        <columns>
+            <TableColumn fx:id="isbnColumn" text="ISBN"/>
+            <TableColumn fx:id="titreColumn" text="Titre"/>
+            <TableColumn fx:id="auteurColumn" text="Auteur"/>
+            <TableColumn fx:id="anneeColumn" text="Année"/>
+        </columns>
+    </TableView>
+</VBox>

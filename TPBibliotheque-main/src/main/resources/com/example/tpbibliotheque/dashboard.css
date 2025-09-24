@@ -1,0 +1,79 @@
+.root {
+    -fx-background-color: #ffffff;
+    -fx-font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+
+.header {
+    -fx-background-color: linear-gradient(to right, #1E293B, #3B82F6);
+    -fx-padding: 20 40;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0, 0, 2);
+}
+
+.title {
+    -fx-text-fill: linear-gradient(from 0% 0% to 100% 0%, #ffffff, #dbf4ff);
+    -fx-font-size: 32px;
+    -fx-font-weight: 900;
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.28), 5, 0, 0, 2);
+    -fx-padding: 5 0 10 0;
+}
+
+
+
+
+.main-content {
+    -fx-padding: 50;
+}
+
+.dashboard-card {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #243751;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 25;
+    -fx-spacing: 10;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-min-width: 180px;
+    -fx-effect: dropshadow(gaussian, rgba(36, 55, 81, 0.1), 5, 0, 0, 2);
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+.dashboard-card:hover {
+    -fx-background-color: rgb(35, 70, 119);
+    -fx-scale-x: 1.07;
+    -fx-scale-y: 1.07;
+}
+
+.dashboard-icon {
+    -fx-font-size: 36px;
+    -fx-text-fill: #243751;
+}
+
+.dashboard-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #243751;
+}
+
+.dashboard-card:hover .dashboard-icon,
+.dashboard-card:hover .dashboard-label {
+    -fx-text-fill: white;
+}
+
+
+
+
+
+.dashboard-button:hover {
+    -fx-background-color: #243751;
+    -fx-text-fill: #ffffff;
+    -fx-cursor: pointer;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+
+.dashboard-button:pressed {
+    -fx-background-color: #1d385c;
+}

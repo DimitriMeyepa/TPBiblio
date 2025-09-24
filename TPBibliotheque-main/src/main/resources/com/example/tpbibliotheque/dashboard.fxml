@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.tpbibliotheque.Controller.DashboardController"
+            stylesheets="@dashboard.css">
+
+
+    <top>
+        <HBox styleClass="header" alignment="CENTER_LEFT" spacing="20">
+            <Label text="📚 Tableau de bord" styleClass="title"/>
+        </HBox>
+    </top>
+
+
+    <center>
+        <VBox spacing="30" alignment="CENTER" styleClass="main-content">
+            <HBox alignment="CENTER" spacing="40">
+                <VBox fx:id="eleveBox" alignment="CENTER" onMouseClicked="#openEleveApp" styleClass="dashboard-card">
+                    <Label text="👤" styleClass="dashboard-icon"/>
+                    <Label text="Élèves" styleClass="dashboard-label"/>
+                </VBox>
+                <VBox fx:id="livreBox" alignment="CENTER" onMouseClicked="#openLivreApp" styleClass="dashboard-card">
+                    <Label text="📚" styleClass="dashboard-icon"/>
+                    <Label text="Livres" styleClass="dashboard-label"/>
+                </VBox>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="40">
+                <VBox fx:id="empruntBox" alignment="CENTER" onMouseClicked="#openEmpruntApp" styleClass="dashboard-card">
+                    <Label text="📥" styleClass="dashboard-icon"/>
+                    <Label text="Emprunts" styleClass="dashboard-label"/>
+                </VBox>
+                <VBox fx:id="retourBox" alignment="CENTER" onMouseClicked="#openRetourApp" styleClass="dashboard-card">
+                    <Label text="📤" styleClass="dashboard-icon"/>
+                    <Label text="Retours" styleClass="dashboard-label"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>

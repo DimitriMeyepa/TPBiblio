@@ -1,0 +1,57 @@
+.root {
+    -fx-background-color: #ffffff;
+    -fx-font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+.main-content {
+    -fx-padding: 40;
+    -fx-spacing: 20;
+}
+
+.input-field {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #243751;
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #94a3b8;
+    -fx-border-color: #3b3b3b;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 10 14;
+}
+
+.livre-button {
+    -fx-min-width: 150px;
+    -fx-background-color: #243751;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-border-color: #151b2b;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(85, 123, 197, 0.15), 8, 0, 0, 3);
+    -fx-transition: all 0.3s ease-in-out;
+    -fx-transform-origin: center center;
+}
+
+.livre-button:hover {
+    -fx-background-color: #244571;
+    -fx-text-fill: #ffffff;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-cursor: pointer;
+}
+
+.livre-button:pressed {
+    -fx-background-color: #1d385c;
+}
+
+
+
+.table-view {
+    -fx-background-color: #fff;
+    -fx-text-fill: white;
+    -fx-border-color: #151b2b;
+
+}

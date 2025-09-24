@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="20" alignment="CENTER"
+      xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.tpbibliotheque.Controller.RetourController"
+      stylesheets="@retour.css"
+      styleClass="main-content">
+
+    <TableView fx:id="empruntTable" prefWidth="650" prefHeight="350" styleClass="retour-table">
+        <columns>
+            <TableColumn fx:id="colEleve" text="Élève" prefWidth="150"/>
+            <TableColumn fx:id="colLivre" text="Livre" prefWidth="150"/>
+            <TableColumn fx:id="colDateEmprunt" text="Date Emprunt" prefWidth="150"/>
+            <TableColumn fx:id="colDateRetour" text="Date Retour" prefWidth="150"/>
+        </columns>
+    </TableView>
+
+    <Button text="Retourner le livre sélectionné" onAction="#marquerRetour" styleClass="retour-button"/>
+</VBox>

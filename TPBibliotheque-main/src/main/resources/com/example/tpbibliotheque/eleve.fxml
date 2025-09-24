@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+
+<VBox xmlns="http://javafx.com/javafx/10.0.1"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.tpbibliotheque.Controller.EleveController"
+      alignment="CENTER"
+      spacing="20"
+      styleClass="main-content"
+      stylesheets="@eleve.css">
+
+    <!-- Formulaire de saisie -->
+    <HBox spacing="15">
+        <TextField fx:id="nomField" promptText="Nom" styleClass="input-field"/>
+        <TextField fx:id="prenomField" promptText="Prénom" styleClass="input-field"/>
+        <TextField fx:id="classeField" promptText="Classe" styleClass="input-field"/>
+        <TextField fx:id="emailField" promptText="Email" styleClass="input-field" />
+    </HBox>
+
+    <!-- Boutons d'action -->
+    <HBox spacing="15">
+        <Button fx:id="ajouterButton" text="Ajouter" onAction="#ajouterEleve" styleClass="eleve-button"/>
+        <Button fx:id="modifierButton" text="Modifier" onAction="#modifierEleve" styleClass="eleve-button"/>
+        <Button fx:id="supprimerButton" text="Supprimer" onAction="#supprimerEleve" styleClass="eleve-button"/>
+        <Button fx:id="annulerButton" text="Annuler" onAction="#annulerSelection" styleClass="eleve-button" visible="false"/>
+    </HBox>
+
+
+    <HBox alignment="CENTER_LEFT">
+        <TextField fx:id="rechercheField"
+                   promptText="Rechercher un élève par nom"
+                   maxWidth="300"
+                   styleClass="searchbar"/>
+    </HBox>
+
+    <!-- Tableau d'élèves -->
+    <TableView fx:id="eleveTable">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" />
+            <TableColumn fx:id="nomColumn" text="Nom" />
+            <TableColumn fx:id="prenomColumn" text="Prénom" />
+            <TableColumn fx:id="classeColumn" text="Classe" />
+            <TableColumn fx:id="emailColumn" text="Email"/>
+        </columns>
+    </TableView>
+
+</VBox>
