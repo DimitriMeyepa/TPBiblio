@@ -65,8 +65,8 @@ public class DashboardController {
 
         try {
             EmailService emailService = new EmailService(
-                    "dimitri.meyepa1@gmail.com",
-                    "hqjwupurbepcuqkb",
+                    "cdibiblio5@gmail.com",
+                    "pyswwuowovsrouno",
                     true
             );
 
