@@ -94,5 +94,18 @@ public class LivreDAO {
         }
         return Optional.empty();
     }
+    public boolean isEmprunte(String codeISBN) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM emprunt WHERE code_isbn = ? AND date_retour IS NULL";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, codeISBN);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+                return false;
+            }
+        }
+    }
+
 
 }

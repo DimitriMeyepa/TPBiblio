@@ -52,4 +52,15 @@ public class Livre {
     public String toString() {
         return titre;
     }
+
+    private boolean emprunte;
+
+    public boolean isEmprunte() {
+        return emprunte;
+    }
+
+    public void setEmprunte(boolean emprunte) {
+        this.emprunte = emprunte;
+    }
+
 }

@@ -26,7 +26,6 @@ public class Main extends Application {
                 Objects.requireNonNull(getClass().getResourceAsStream("/com/example/tpbibliotheque/images/logo.png"))
         ));
 
-        // Lancer directement le dashboard
         showDashboard();
     }
 

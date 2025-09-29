@@ -4,7 +4,8 @@ module com.example.tpbibliotheque {
     requires java.desktop;
     requires java.sql;
     requires jakarta.mail;
-
+    requires kernel;
+    requires layout;
     opens com.example.tpbibliotheque to javafx.fxml;
     opens com.example.tpbibliotheque.Controller to javafx.fxml;
     opens com.example.tpbibliotheque.DAO to javafx.fxml;

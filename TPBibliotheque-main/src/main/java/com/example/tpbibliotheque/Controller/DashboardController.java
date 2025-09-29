@@ -73,8 +73,8 @@ public class DashboardController {
             EmpruntService empruntService = new EmpruntService(
                     DBconnection.getConnection(),
                     new EleveDAO(DBconnection.getConnection()),
-                    emailService,                 // EmailService ici
-                    new LivreDAO(DBconnection.getConnection()) // LivreDAO à la fin
+                    emailService,
+                    new LivreDAO(DBconnection.getConnection())
             );
             EmpruntController controller = loader.getController();
             controller.setServices(empruntService, eleveDAO, livreDAO);

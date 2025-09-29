@@ -2,6 +2,7 @@ package com.example.tpbibliotheque.Service;
 
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
@@ -61,6 +62,40 @@ public class EmailService {
         alternative.addBodyPart(htmlPart);
 
         msg.setContent(alternative);
+        msg.saveChanges();
+
+        Transport.send(msg);
+    }
+
+    public void sendLoanEmailWithAttachment(String to, String sujet, String texte, String html, File pdf)
+            throws Exception {
+        MimeMessage msg = new MimeMessage(session());
+        msg.setFrom(new InternetAddress(username));
+        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
+        msg.setSubject(sujet, StandardCharsets.UTF_8.name());
+
+        MimeMultipart multipart = new MimeMultipart();
+
+        MimeBodyPart alternativePart = new MimeBodyPart();
+        MimeMultipart alternative = new MimeMultipart("alternative");
+
+        MimeBodyPart textPart = new MimeBodyPart();
+        textPart.setText(texte, StandardCharsets.UTF_8.name());
+        alternative.addBodyPart(textPart);
+
+        MimeBodyPart htmlPart = new MimeBodyPart();
+        htmlPart.setContent(html, "text/html; charset=UTF-8");
+        alternative.addBodyPart(htmlPart);
+
+        alternativePart.setContent(alternative);
+        multipart.addBodyPart(alternativePart);
+
+
+        MimeBodyPart attachmentPart = new MimeBodyPart();
+        attachmentPart.attachFile(pdf);
+        multipart.addBodyPart(attachmentPart);
+
+        msg.setContent(multipart);
         msg.saveChanges();
 
         Transport.send(msg);

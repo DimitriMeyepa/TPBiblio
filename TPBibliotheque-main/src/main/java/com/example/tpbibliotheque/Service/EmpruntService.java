@@ -2,10 +2,13 @@ package com.example.tpbibliotheque.Service;
 
 import com.example.tpbibliotheque.DAO.EleveDAO;
 import com.example.tpbibliotheque.DAO.LivreDAO;
-import com.example.tpbibliotheque.model.Livre;
+import com.example.tpbibliotheque.Utils.PDFUtil;
+import com.example.tpbibliotheque.model.Emprunt;
 import jakarta.mail.MessagingException;
 
+import java.io.File;
 import java.sql.Connection;
+import java.time.LocalDate;
 
 public class EmpruntService {
 
@@ -22,7 +25,7 @@ public class EmpruntService {
     }
 
     public void validerEmprunt(int eleveId, String livreCodeISBN) throws Exception {
-        // Enregistrer l'emprunt dans la base
+
         try (var ps = conn.prepareStatement(
                 "INSERT INTO emprunt(id_eleve, code_isbn, date_emprunt) VALUES (?, ?, now())"
         )) {
@@ -31,7 +34,6 @@ public class EmpruntService {
             ps.executeUpdate();
         }
 
-        // Récupérer les infos de l'élève et du livre
         var eleveOpt = eleveDAO.findById(eleveId);
         var livreOpt = livreDAO.findByCodeISBN(livreCodeISBN);
 
@@ -52,10 +54,18 @@ public class EmpruntService {
                         "<p>Merci de respecter la date de retour.</p>" +
                         "<p>Cordialement,<br><b>Le CDI</b></p></body></html>";
 
+
+                Emprunt emprunt = new Emprunt();
+                emprunt.setEleve(eleveOpt.get());
+                emprunt.setLivre(livreOpt.get());
+                emprunt.setDateEmprunt(LocalDate.now());
+
+                File pdf = PDFUtil.genererPDFRecu(emprunt);
+
                 new Thread(() -> {
                     try {
-                        emailService.sendLoanEmail(email, sujet, texte, html);
-                    } catch (MessagingException e) {
+                        emailService.sendLoanEmailWithAttachment(email, sujet, texte, html, pdf);
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }).start();
