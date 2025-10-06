@@ -6,6 +6,10 @@ module com.example.tpbibliotheque {
     requires jakarta.mail;
     requires kernel;
     requires layout;
+    requires io;
+    requires com.google.zxing;
+    requires com.google.zxing.javase;
+    requires nanohttpd;
     opens com.example.tpbibliotheque to javafx.fxml;
     opens com.example.tpbibliotheque.Controller to javafx.fxml;
     opens com.example.tpbibliotheque.DAO to javafx.fxml;
