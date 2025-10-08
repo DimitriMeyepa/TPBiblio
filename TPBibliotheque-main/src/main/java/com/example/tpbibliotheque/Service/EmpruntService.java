@@ -2,6 +2,7 @@ package com.example.tpbibliotheque.Service;
 
 import com.example.tpbibliotheque.DAO.EleveDAO;
 import com.example.tpbibliotheque.DAO.LivreDAO;
+import com.example.tpbibliotheque.DAO.EmpruntDAO;
 import com.example.tpbibliotheque.Utils.PDFUtil;
 import com.example.tpbibliotheque.model.Emprunt;
 import jakarta.mail.MessagingException;
@@ -16,60 +17,61 @@ public class EmpruntService {
     private final EleveDAO eleveDAO;
     private final EmailService emailService;
     private final LivreDAO livreDAO;
+    private final EmpruntDAO empruntDAO; // ✅ On ajoute le DAO ici
 
     public EmpruntService(Connection conn, EleveDAO eleveDAO, EmailService emailService, LivreDAO livreDAO) {
         this.conn = conn;
         this.eleveDAO = eleveDAO;
         this.emailService = emailService;
         this.livreDAO = livreDAO;
+        this.empruntDAO = new EmpruntDAO(conn); // ✅ Initialisation
     }
 
     public void validerEmprunt(int eleveId, String livreCodeISBN) throws Exception {
-
-        try (var ps = conn.prepareStatement(
-                "INSERT INTO emprunt(id_eleve, code_isbn, date_emprunt) VALUES (?, ?, now())"
-        )) {
-            ps.setInt(1, eleveId);
-            ps.setString(2, livreCodeISBN);
-            ps.executeUpdate();
-        }
 
         var eleveOpt = eleveDAO.findById(eleveId);
         var livreOpt = livreDAO.findByCodeISBN(livreCodeISBN);
 
         if (eleveOpt.isPresent() && livreOpt.isPresent()) {
-            String email = eleveOpt.get().getEmail();
-            String eleveNom = eleveOpt.get().getNom();
-            String elevePrenom = eleveOpt.get().getPrenom();
-            String titreLivre = livreOpt.get().getTitre();
+            var eleve = eleveOpt.get();
+            var livre = livreOpt.get();
 
-            if (email != null && !email.isEmpty()) {
+            // ✅ Création de l'objet Emprunt
+            Emprunt emprunt = new Emprunt();
+            emprunt.setEleve(eleve);
+            emprunt.setLivre(livre);
+            emprunt.setDateEmprunt(LocalDate.now());
+
+            // ✅ Appel du DAO qui insère et récupère l’ID auto-généré
+            empruntDAO.create(emprunt);
+
+            System.out.println("✅ Emprunt créé avec ID : " + emprunt.getId());
+
+            // ✅ Génération du PDF avec le vrai ID
+            File pdf = PDFUtil.genererPDFRecu(emprunt);
+
+            // ✅ Envoi du mail
+            if (eleve.getEmail() != null && !eleve.getEmail().isEmpty()) {
                 String sujet = "Confirmation d’emprunt de livre";
-                String texte = "Bonjour " + elevePrenom + " " + eleveNom + ",\n\n" +
-                        "Votre emprunt du livre \"" + titreLivre + "\" a été enregistré avec succès.\n" +
+                String texte = "Bonjour " + eleve.getPrenom() + " " + eleve.getNom() + ",\n\n" +
+                        "Votre emprunt du livre \"" + livre.getTitre() + "\" a été enregistré avec succès.\n" +
                         "Merci de respecter la date de retour.\n\nCordialement,\nLe CDI";
 
-                String html = "<html><body><p>Bonjour " + elevePrenom + " " + eleveNom + ",</p>" +
-                        "<p>Votre <b>emprunt</b> du livre <b>\"" + titreLivre + "\"</b> a été enregistré avec succès.</p>" +
+                String html = "<html><body><p>Bonjour " + eleve.getPrenom() + " " + eleve.getNom() + ",</p>" +
+                        "<p>Votre <b>emprunt</b> du livre <b>\"" + livre.getTitre() + "\"</b> a été enregistré avec succès.</p>" +
                         "<p>Merci de respecter la date de retour.</p>" +
                         "<p>Cordialement,<br><b>Le CDI</b></p></body></html>";
 
-
-                Emprunt emprunt = new Emprunt();
-                emprunt.setEleve(eleveOpt.get());
-                emprunt.setLivre(livreOpt.get());
-                emprunt.setDateEmprunt(LocalDate.now());
-
-                File pdf = PDFUtil.genererPDFRecu(emprunt);
-
                 new Thread(() -> {
                     try {
-                        emailService.sendLoanEmailWithAttachment(email, sujet, texte, html, pdf);
+                        emailService.sendLoanEmailWithAttachment(eleve.getEmail(), sujet, texte, html, pdf);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }).start();
             }
+        } else {
+            throw new Exception("Élève ou livre introuvable.");
         }
     }
 }

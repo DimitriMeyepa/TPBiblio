@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #0A2E63;
+            margin: 40px 60px;
+            position: relative;
+        }
+
+        /* --- HEADER --- */
+        .header {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header-content {
+            text-align: right;
+        }
+
+        .header-content h1 {
+            font-size: 30px;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .header-content .id {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .logo {
+            width: 80px;
+            margin-left: 20px;
+        }
+
+        /* --- CONTENU --- */
+        .content {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .content p {
+            margin: 4px 0;
+            font-size: 14px;
+        }
+
+        .label {
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* --- QR CODE --- */
+        .qr {
+            text-align: center;
+            margin: 30px 0 40px 0;
+        }
+
+        .qr img {
+            width: 280px;
+            height: 280px;
+        }
+
+        /* --- PIED DE PAGE --- */
+        .footer {
+            margin-top: 10px;
+            width: 100%;
+            page-break-inside: avoid;
+        }
+
+        .message {
+            font-size: 12px;
+            color: #333;
+        }
+
+        .signature-container {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .signature-container img {
+            width: 220px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="header-content">
+        <h1>CDI</h1>
+        <div class="id">#{{idemprunt}}</div>
+    </div>
+    <img src="data:image/png;base64,{{logo}}" class="logo" />
+</div>
+
+<div class="content">
+    <p><span class="label">ÉLÈVE :</span> {{nom}} {{prenom}}</p>
+    <p><span class="label">LIVRE :</span> {{livre}}</p>
+    <p><span class="label">DATE RETOUR :</span> {{dateRetour}}</p>
+</div>
+
+<div class="qr">
+    <img src="data:image/png;base64,{{qr}}" alt="QR Code">
+</div>
+
+<div class="footer">
+    <p class="message">{{message}}</p>
+    <div class="signature-container">
+        <img src="data:image/png;base64,{{signature}}" alt="Signature">
+    </div>
+</div>
+
+</body>
+</html>

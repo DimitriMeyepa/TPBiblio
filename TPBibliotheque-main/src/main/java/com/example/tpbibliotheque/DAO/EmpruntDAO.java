@@ -90,7 +90,7 @@ public class EmpruntDAO {
 
         String sql = "INSERT INTO emprunt (id_eleve, code_isbn, date_emprunt, date_retour) VALUES (?, ?, ?, ?)";
 
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, e.getEleve().getIdEleve());
             ps.setString(2, e.getLivre().getCodeISBN());
             ps.setDate(3, Date.valueOf(e.getDateEmprunt()));
@@ -102,6 +102,13 @@ public class EmpruntDAO {
             }
 
             ps.executeUpdate();
+
+            // ✅ Récupération de l'ID auto-incrémenté
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    e.setId(rs.getInt(1));
+                }
+            }
         }
     }
 }
