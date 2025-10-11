@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmpruntDAO {
-
     private final Connection conn;
 
     public EmpruntDAO(Connection conn) {
@@ -55,7 +54,6 @@ public class EmpruntDAO {
                 list.add(emprunt);
             }
         }
-
         return list;
     }
 
@@ -73,14 +71,9 @@ public class EmpruntDAO {
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, codeISBN);
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    int count = rs.getInt(1);
-                    System.out.println("Emprunts actifs pour le livre " + codeISBN + ": " + count);
-                    return count == 0;
-                }
+                return rs.next() && rs.getInt(1) == 0;
             }
         }
-        return false;
     }
 
     public void create(Emprunt e) throws SQLException {
@@ -89,26 +82,28 @@ public class EmpruntDAO {
         }
 
         String sql = "INSERT INTO emprunt (id_eleve, code_isbn, date_emprunt, date_retour) VALUES (?, ?, ?, ?)";
-
         try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setInt(1, e.getEleve().getIdEleve());
             ps.setString(2, e.getLivre().getCodeISBN());
             ps.setDate(3, Date.valueOf(e.getDateEmprunt()));
-
             if (e.getDateRetour() != null) {
                 ps.setDate(4, Date.valueOf(e.getDateRetour()));
             } else {
                 ps.setNull(4, java.sql.Types.DATE);
             }
-
             ps.executeUpdate();
-
-            // ✅ Récupération de l'ID auto-incrémenté
             try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) {
-                    e.setId(rs.getInt(1));
-                }
+                if (rs.next()) e.setId(rs.getInt(1));
             }
         }
+    }
+
+
+    public int countEmprunts() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM emprunt WHERE date_retour IS NULL";
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+            if (rs.next()) return rs.getInt(1);
+        }
+        return 0;
     }
 }

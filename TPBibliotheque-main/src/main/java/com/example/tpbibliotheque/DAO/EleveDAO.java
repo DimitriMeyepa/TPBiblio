@@ -89,4 +89,16 @@ public class EleveDAO {
         }
         return Optional.empty();
     }
+
+    // ✅ Méthode ajoutée pour compter les élèves (utilisée dans le Dashboard)
+    public int countEleves() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM eleve";
+        try (Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        }
+        return 0;
+    }
 }

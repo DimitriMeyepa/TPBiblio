@@ -11,6 +11,7 @@ module com.example.tpbibliotheque {
     requires com.google.zxing.javase;
     requires nanohttpd;
     requires html2pdf;
+    requires jbcrypt;
     opens com.example.tpbibliotheque to javafx.fxml;
     opens com.example.tpbibliotheque.Controller to javafx.fxml;
     opens com.example.tpbibliotheque.DAO to javafx.fxml;

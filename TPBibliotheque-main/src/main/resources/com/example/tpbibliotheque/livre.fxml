@@ -1,29 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.geometry.Insets?>
-<?import javafx.geometry.Pos?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
 
-<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx"
+<VBox xmlns="http://javafx.com/javafx/10.0.1"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.tpbibliotheque.Controller.LivreController"
-      stylesheets="@livre.css"
-      fx:id="livreSection"
-      styleClass="main-content">
-    <TextField fx:id="isbnField" promptText="Code ISBN" styleClass="input-field"/>
-    <TextField fx:id="titreField" promptText="Titre" styleClass="input-field"/>
-    <TextField fx:id="auteurField" promptText="Auteur" styleClass="input-field"/>
-    <TextField fx:id="anneeField" promptText="Année de publication" styleClass="input-field"/>
+      alignment="CENTER"
+      spacing="20"
+      styleClass="main-content"
+      stylesheets="@livre.css">
 
-    <HBox spacing="10" alignment="CENTER">
+    <!-- Formulaire de saisie -->
+    <HBox spacing="15">
+        <TextField fx:id="isbnField" promptText="Code ISBN" styleClass="input-field"/>
+        <TextField fx:id="titreField" promptText="Titre" styleClass="input-field"/>
+        <TextField fx:id="auteurField" promptText="Auteur" styleClass="input-field"/>
+        <TextField fx:id="anneeField" promptText="Année de publication" styleClass="input-field"/>
+    </HBox>
+
+    <!-- Boutons d'action -->
+    <HBox spacing="15">
         <Button fx:id="ajouterButton" text="Ajouter" onAction="#ajouterLivre" styleClass="livre-button"/>
         <Button fx:id="modifierButton" text="Modifier" onAction="#modifierLivre" styleClass="livre-button"/>
         <Button fx:id="supprimerButton" text="Supprimer" onAction="#supprimerLivre" styleClass="livre-button"/>
-        <Button fx:id="annulerButton" text="Annuler" onAction="#annulerSelection" visible="false" styleClass="livre-button"/>
+        <Button fx:id="annulerButton" text="Annuler" onAction="#annulerSelection" styleClass="livre-button" visible="false"/>
     </HBox>
 
+    <!-- Barre de recherche -->
+    <HBox alignment="CENTER_LEFT">
+        <TextField fx:id="rechercheField"
+                   promptText="Rechercher un livre par titre"
+                   maxWidth="300"
+                   styleClass="searchbar"/>
+    </HBox>
+
+    <!-- Tableau des livres -->
     <TableView fx:id="livreTable" prefHeight="250">
         <columns>
             <TableColumn fx:id="isbnColumn" text="ISBN"/>
@@ -32,4 +48,5 @@
             <TableColumn fx:id="anneeColumn" text="Année"/>
         </columns>
     </TableView>
+
 </VBox>

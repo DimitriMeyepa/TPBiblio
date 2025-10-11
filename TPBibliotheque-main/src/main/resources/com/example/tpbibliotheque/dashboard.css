@@ -1,79 +1,78 @@
 .root {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #f7f9fc;
     -fx-font-family: "Inter", "Segoe UI", sans-serif;
 }
 
-
+/* HEADER */
 .header {
-    -fx-background-color: linear-gradient(to right, #1E293B, #3B82F6);
+    -fx-background-color: #1E293B;
     -fx-padding: 20 40;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0, 0, 2);
 }
-
 .title {
-    -fx-text-fill: linear-gradient(from 0% 0% to 100% 0%, #ffffff, #dbf4ff);
-    -fx-font-size: 32px;
-    -fx-font-weight: 900;
-    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.28), 5, 0, 0, 2);
-    -fx-padding: 5 0 10 0;
-}
-
-
-
-
-.main-content {
-    -fx-padding: 50;
-}
-
-.dashboard-card {
-    -fx-background-color: #ffffff;
-    -fx-border-color: #243751;
-    -fx-border-radius: 8;
-    -fx-background-radius: 8;
-    -fx-padding: 25;
-    -fx-spacing: 10;
-    -fx-alignment: center;
-    -fx-cursor: hand;
-    -fx-min-width: 180px;
-    -fx-effect: dropshadow(gaussian, rgba(36, 55, 81, 0.1), 5, 0, 0, 2);
-    -fx-transition: all 0.2s ease-in-out;
-}
-
-.dashboard-card:hover {
-    -fx-background-color: rgb(35, 70, 119);
-    -fx-scale-x: 1.07;
-    -fx-scale-y: 1.07;
-}
-
-.dashboard-icon {
-    -fx-font-size: 36px;
-    -fx-text-fill: #243751;
-}
-
-.dashboard-label {
-    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-font-size: 28px;
     -fx-font-weight: bold;
-    -fx-text-fill: #243751;
 }
 
-.dashboard-card:hover .dashboard-icon,
-.dashboard-card:hover .dashboard-label {
+/* SIDEBAR */
+.sidebar {
+    -fx-background-color: #243751;
+    -fx-padding: 30 10;
+    -fx-pref-width: 220px;
+    -fx-alignment: TOP_CENTER;
+}
+
+.sidebar-title {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 20 0;
+}
+
+.sidebar-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #e2e8f0;
+    -fx-font-size: 15px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 10 20;
+    -fx-cursor: hand;
+    -fx-background-radius: 6;
+}
+
+.sidebar-btn:hover {
+    -fx-background-color: #1f2e44;
     -fx-text-fill: white;
 }
 
-
-
-
-
-.dashboard-button:hover {
-    -fx-background-color: #243751;
-    -fx-text-fill: #ffffff;
-    -fx-cursor: pointer;
-    -fx-scale-x: 1.1;
-    -fx-scale-y: 1.1;
+/* CONTENU PRINCIPAL */
+.main-content {
+    -fx-padding: 60;
 }
 
+.stat-card {
+    -fx-background-color: white;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 20 40;
+    -fx-alignment: center;
+    -fx-spacing: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 3);
+    -fx-min-width: 200px;
+}
 
-.dashboard-button:pressed {
-    -fx-background-color: #1d385c;
+.stat-icon {
+    -fx-font-size: 40px;
+}
+
+.stat-label {
+    -fx-text-fill: #475569;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.stat-value {
+    -fx-text-fill: #1E293B;
+    -fx-font-size: 26px;
+    -fx-font-weight: 900;
 }

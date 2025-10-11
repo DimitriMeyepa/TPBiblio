@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 public class LivreDAO {
     Connection conn;
 
@@ -54,20 +53,14 @@ public class LivreDAO {
     }
 
     public void delete(String isbn) throws SQLException {
-
         String checkSql = "SELECT COUNT(*) FROM emprunt WHERE code_isbn = ? AND date_retour IS NULL";
         try (PreparedStatement checkStmt = conn.prepareStatement(checkSql)) {
             checkStmt.setString(1, isbn);
             try (ResultSet rs = checkStmt.executeQuery()) {
-                if (rs.next()) {
-                    int count = rs.getInt(1);
-                    if (count > 0) {
-                        throw new SQLException("Impossible de supprimer un livre non retourné.");
-                    }
-                }
+                if (rs.next() && rs.getInt(1) > 0)
+                    throw new SQLException("Impossible de supprimer un livre non retourné.");
             }
         }
-
 
         String sql = "DELETE FROM livre WHERE code_isbn = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -75,6 +68,7 @@ public class LivreDAO {
             stmt.executeUpdate();
         }
     }
+
     public Optional<Livre> findByCodeISBN(String codeISBN) {
         String sql = "SELECT * FROM livre WHERE code_isbn = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -94,18 +88,23 @@ public class LivreDAO {
         }
         return Optional.empty();
     }
+
     public boolean isEmprunte(String codeISBN) throws SQLException {
         String sql = "SELECT COUNT(*) FROM emprunt WHERE code_isbn = ? AND date_retour IS NULL";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, codeISBN);
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt(1) > 0;
-                }
-                return false;
+                return rs.next() && rs.getInt(1) > 0;
             }
         }
     }
 
 
+    public int countLivres() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM livre";
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+            if (rs.next()) return rs.getInt(1);
+        }
+        return 0;
+    }
 }

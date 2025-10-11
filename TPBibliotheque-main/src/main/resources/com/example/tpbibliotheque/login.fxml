@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.tpbibliotheque.Controller.LoginController"
+            prefWidth="800" prefHeight="500"
+            style="-fx-font-family: 'Segoe UI';">
+
+    <!-- Partie gauche (bleue avec icône et texte) -->
+    <left>
+        <VBox alignment="CENTER" spacing="15" prefWidth="350"
+              style="-fx-background-color: #1f2e44;"> <!-- Bleu profond -->
+            <children>
+
+                <Label text="">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-book" iconSize="90" iconColor="white"/>
+                    </graphic>
+                </Label>
+
+                <Label text="TPBibliothèque"
+                       style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+
+                <Label text="Gestion et suivi des emprunts"
+                       style="-fx-font-size: 14px; -fx-text-fill: #e0e0e0;"/>
+            </children>
+        </VBox>
+    </left>
+
+    <!-- Partie droite (formulaire de connexion) -->
+    <center>
+        <VBox alignment="CENTER" spacing="20" prefWidth="450">
+            <padding>
+                <Insets top="60" left="80" right="80" bottom="60"/>
+            </padding>
+            <children>
+
+                <Label text="Connexion"
+                       style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+
+                <TextField fx:id="usernameField" promptText="Email"
+                           style="-fx-background-radius: 8; -fx-padding: 10; -fx-border-color: #ccc; -fx-border-radius: 8;"/>
+
+                <PasswordField fx:id="passwordField" promptText="Mot de passe"
+                               style="-fx-background-radius: 8; -fx-padding: 10; -fx-border-color: #ccc; -fx-border-radius: 8;"/>
+
+                <!-- Bouton de connexion -->
+                <Button fx:id="loginButton"
+                        text="Se connecter"
+                        onAction="#handleLogin"
+                        style="-fx-background-color: #1f2e44; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-padding: 10 20;">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-sign-in-alt" iconSize="16" iconColor="white"/>
+                    </graphic>
+                </Button>
+
+                <!-- Label d'erreur -->
+                <Label fx:id="errorLabel"
+                       style="-fx-font-size: 12px; -fx-text-fill: red; -fx-font-weight: bold;"/>
+
+                <!-- Label pour l'animation des points -->
+                <Label fx:id="loadingLabel"
+                       text=""
+                       style="-fx-font-size: 60px; -fx-text-fill: #11f2e44; -fx-font-weight: bold;"/>
+
+            </children>
+        </VBox>
+    </center>
+
+</BorderPane>

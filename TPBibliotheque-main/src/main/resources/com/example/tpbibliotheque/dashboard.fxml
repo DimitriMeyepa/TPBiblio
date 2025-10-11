@@ -3,42 +3,72 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.tpbibliotheque.Controller.DashboardController"
+            fx:id="mainBorderPane"
             stylesheets="@dashboard.css">
 
+    <!-- Sidebar -->
+    <left>
+        <VBox spacing="20" styleClass="sidebar" alignment="TOP_CENTER">
+            <children>
 
+                <!-- Boutons du haut -->
+                <Button text="🏠 Dashboard" styleClass="sidebar-btn" onAction="#openDashboard"/>
+                <Button text="👨‍🎓 Élèves" styleClass="sidebar-btn" onAction="#openEleveApp"/>
+                <Button text="📘 Livres" styleClass="sidebar-btn" onAction="#openLivreApp"/>
+                <Button text="📖 Emprunts" styleClass="sidebar-btn" onAction="#openEmpruntApp"/>
+                <Button text="🔁 Retours" styleClass="sidebar-btn" onAction="#openRetourApp"/>
+
+                <!-- Espace vide pour pousser le bouton de déconnexion vers le bas -->
+                <Pane VBox.vgrow="ALWAYS"/>
+
+                <!-- Bouton de déconnexion distinct -->
+                <Button text="🚪 Se déconnecter"
+                        onAction="#handleLogout"
+                        style="-fx-background-color: #1f2e44;
+                               -fx-text-fill: white;
+                               -fx-font-weight: bold;
+                               -fx-background-radius: 8;
+                               -fx-padding: 10 20;
+                               -fx-cursor: hand;"/>
+            </children>
+        </VBox>
+    </left>
+
+    <!-- Haut -->
     <top>
         <HBox styleClass="header" alignment="CENTER_LEFT" spacing="20">
-            <Label text="📚 Tableau de bord" styleClass="title"/>
+            <Label text="Gestion Bibliothèque" styleClass="title"/>
         </HBox>
     </top>
 
-
+    <!-- Contenu principal -->
     <center>
-        <VBox spacing="30" alignment="CENTER" styleClass="main-content">
-            <HBox alignment="CENTER" spacing="40">
-                <VBox fx:id="eleveBox" alignment="CENTER" onMouseClicked="#openEleveApp" styleClass="dashboard-card">
-                    <Label text="👤" styleClass="dashboard-icon"/>
-                    <Label text="Élèves" styleClass="dashboard-label"/>
-                </VBox>
-                <VBox fx:id="livreBox" alignment="CENTER" onMouseClicked="#openLivreApp" styleClass="dashboard-card">
-                    <Label text="📚" styleClass="dashboard-icon"/>
-                    <Label text="Livres" styleClass="dashboard-label"/>
-                </VBox>
-            </HBox>
+        <VBox alignment="CENTER" spacing="30" styleClass="main-content">
+            <HBox spacing="40" alignment="CENTER">
 
-            <HBox alignment="CENTER" spacing="40">
-                <VBox fx:id="empruntBox" alignment="CENTER" onMouseClicked="#openEmpruntApp" styleClass="dashboard-card">
-                    <Label text="📥" styleClass="dashboard-icon"/>
-                    <Label text="Emprunts" styleClass="dashboard-label"/>
+                <VBox alignment="CENTER" styleClass="stat-card">
+                    <Label text="👨‍🎓" styleClass="stat-icon"/>
+                    <Label text="Élèves inscrits" styleClass="stat-label"/>
+                    <Label fx:id="lblNombreEleves" text="0" styleClass="stat-value"/>
                 </VBox>
-                <VBox fx:id="retourBox" alignment="CENTER" onMouseClicked="#openRetourApp" styleClass="dashboard-card">
-                    <Label text="📤" styleClass="dashboard-icon"/>
-                    <Label text="Retours" styleClass="dashboard-label"/>
+
+                <VBox alignment="CENTER" styleClass="stat-card">
+                    <Label text="📘" styleClass="stat-icon"/>
+                    <Label text="Livres disponibles" styleClass="stat-label"/>
+                    <Label fx:id="lblNombreLivres" text="0" styleClass="stat-value"/>
                 </VBox>
+
+                <VBox alignment="CENTER" styleClass="stat-card">
+                    <Label text="📖" styleClass="stat-icon"/>
+                    <Label text="Emprunts en cours" styleClass="stat-label"/>
+                    <Label fx:id="lblNombreEmprunts" text="0" styleClass="stat-value"/>
+                </VBox>
+
             </HBox>
         </VBox>
     </center>

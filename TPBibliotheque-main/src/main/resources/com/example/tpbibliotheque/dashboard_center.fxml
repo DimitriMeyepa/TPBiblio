@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.tpbibliotheque.Controller.DashboardCenterController"
+      alignment="CENTER" spacing="30"
+      styleClass="main-content">
+
+    <HBox spacing="40" alignment="CENTER">
+        <VBox alignment="CENTER" styleClass="stat-card">
+            <Label text="👨‍🎓" styleClass="stat-icon"/>
+            <Label text="Élèves inscrits" styleClass="stat-label"/>
+            <Label fx:id="lblNombreEleves" text="0" styleClass="stat-value"/>
+        </VBox>
+
+        <VBox alignment="CENTER" styleClass="stat-card">
+            <Label text="📘" styleClass="stat-icon"/>
+            <Label text="Livres disponibles" styleClass="stat-label"/>
+            <Label fx:id="lblNombreLivres" text="0" styleClass="stat-value"/>
+        </VBox>
+
+        <VBox alignment="CENTER" styleClass="stat-card">
+            <Label text="📖" styleClass="stat-icon"/>
+            <Label text="Emprunts en cours" styleClass="stat-label"/>
+            <Label fx:id="lblNombreEmprunts" text="0" styleClass="stat-value"/>
+        </VBox>
+    </HBox>
+</VBox>
